@@ -1,0 +1,27 @@
+home:
+    pattern:  /
+    defaults: { _controller: elinoixshopBundle:Default:index }
+    
+login_redirect:
+    pattern: /login_redirect
+    defaults: { _controller: elinoixshopBundle:Security:login_redirect }
+    
+produit:
+    resource: "@elinoixshopBundle/Resources/config/routing/produit.yml"
+    prefix:   /produit
+
+org:
+    resource: "@elinoixshopBundle/Resources/config/routing/organisation.yml"
+    prefix:   /org
+    
+client:
+    resource: "@elinoixshopBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+    
+panier: 
+    resource: "@elinoixshopBundle/Resources/config/routing/panier.yml" 
+    prefix : /panier
+    
+commande: 
+    resource: "@elinoixshopBundle/Resources/config/routing/commande.yml" 
+    prefix : /commande

@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+Liste des Commande
+{% endblock %}
+
+{% block page_title %}
+Liste des Commande
+{% endblock %}
+
+{% block page_subtitle %}{% endblock %}
+
+{% block body -%}
+
+    <div class="row">
+        <div class="col-xs-12">
+            {% for flashMessage in app.session.flashbag.get('danger') %}
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('warning') %}
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>State</th>
+                <th>Prixtotal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('commande_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.state }}</td>
+                <td>{{ entity.prixTotal }}</td>
+                <td>
+                <ul>
+                    <li>                        <a href="{{ path('commande_show', { 'id': entity.id }) }}"> voir </a>
+                                            </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

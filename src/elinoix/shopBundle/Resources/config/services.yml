@@ -1,0 +1,7 @@
+parameters:
+#    elinoixshop.example.class: elinoix\shopBundle\Example
+
+services:
+#    elinoixshop.example:
+#        class: %elinoixshop.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,96 @@
+{% extends '::base.html.twig' %}
+
+{% block jumbotron_title %}
+{{entity.nom}}
+{% endblock %}
+
+{% block jumbotron_content %}
+<h3><i class="fa fa-truck"></i> Prochaine livraison : </h3>
+<a href="{{ path ('organisation_show', {'id': entity.id }) }}">Accéder aux produits</a>
+{% endblock %}
+
+{% block title %}
+Passer une commande
+{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+
+{% block body -%}
+
+    <div class="row">
+        <div class="col-xs-12">
+            {% for flashMessage in app.session.flashbag.get('danger') %}
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('warning') %}
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4><p>Bienvenue sur l'espace de commande. Sur cette page, vous pouvez passer ou modifier une commande.</p> 
+                <p>Toutes les commandes de votre organisation seront livrées à la date indiquée.</p>
+            </h4> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Produits</h2>
+            {{ render(controller('elinoixshopBundle:Produit:showProduits')) }}
+        </div>
+        <div class="col-lg-6">
+            <h2>Commandes</h2>
+        </div>
+    </div>
+    
+
+    {#<table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ entity.login }}</td>
+            </tr>
+            <tr>
+                <th>Pass</th>
+                <td>{{ entity.pass }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('organisation') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('organisation_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>#}
+</ul>
+{% endblock %}

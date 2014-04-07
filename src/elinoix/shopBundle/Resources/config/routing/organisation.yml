@@ -1,0 +1,30 @@
+organisation:
+    pattern:  /
+    defaults: { _controller: "elinoixshopBundle:Organisation:index" }
+
+organisation_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "elinoixshopBundle:Organisation:show" }
+
+organisation_new:
+    pattern:  /new
+    defaults: { _controller: "elinoixshopBundle:Organisation:new" }
+
+organisation_create:
+    pattern:  /create
+    defaults: { _controller: "elinoixshopBundle:Organisation:create" }
+    requirements: { _method: post }
+
+organisation_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "elinoixshopBundle:Organisation:edit" }
+
+organisation_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "elinoixshopBundle:Organisation:update" }
+    requirements: { _method: post|put }
+
+organisation_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "elinoixshopBundle:Organisation:delete" }
+    requirements: { _method: post|delete }

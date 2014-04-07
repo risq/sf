@@ -1,0 +1,36 @@
+elinoix\shopBundle\Entity\Client:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        prenom:
+            type: string
+            length: 255
+        adresse:
+            type: string
+            length: 255
+        codePostal:
+            type: integer
+        ville:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    
+    manyToOne:
+        organisation:
+            targetEntity: Organisation
+            inversedBy: features
+            joinColumn:
+                name: organisation
+                referencedColumnName: id

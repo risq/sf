@@ -1,0 +1,24 @@
+#Panier
+contenuPanier:
+    pattern:  /
+    defaults: { _controller: elinoixshopBundle:Panier:contenuPanier}
+    
+ajoutArticle:
+    pattern:  /ajoutArticle/{article_id}/{qte}
+    defaults: { _controller: elinoixshopBundle:Panier:ajoutArticle}
+    
+soustraitArticle:
+    pattern:  /soustraitArticle/{article_id}
+    defaults: { _controller: elinoixshopBundle:Panier:soustraitArticle}
+    
+supprimerArticle:
+    pattern:  /supprimerArticle/{article_id}
+    defaults: { _controller: elinoixshopBundle:Panier:supprimerArticle}
+    
+viderPanier:
+    pattern:  /viderPanier
+    defaults: { _controller: elinoixshopBundle:Panier:viderPanier}
+    
+validationPanier:
+    pattern:  /valider
+    defaults: { _controller: elinoixshopBundle:Panier:validationPanier}

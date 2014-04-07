@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+Mon Panier
+{% endblock %}
+
+{% block page_title %}
+Mon panier
+{% endblock %}
+
+{% block page_subtitle %}
+{{total_qte}} articles
+{% endblock %}
+
+{% block body %}
+
+{% for flashMessage in app.session.flashbag.get('danger') %}
+<div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    {{ flashMessage }}
+</div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('warning') %}
+<div class="alert alert-dismissable alert-warning">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    {{ flashMessage }}
+</div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    {{ flashMessage }}
+</div>
+{% endfor %}
+
+
+<table class="table panier-table">
+    <thead>
+        <tr>
+            <th>Article</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>
+                    <a href="{{ path ('produit', {'product_id': row.product.id }) }}">
+                        {{row.product.nom}}
+                    </a>
+                </td>
+                <td>{{row.product.prix}}€</td>
+                <td><a href="{{ path ('soustraitArticle', {'article_id': row.product.id}) }}">
+                        <button type="button" class="btn btn-primary btn-xs">-</button>
+                    </a>
+                    <span class="quantity">{{row.qte}}</span> 
+                    <a href="{{ path ('ajoutArticle', {'article_id': row.product.id, 'qte' : 1 }) }}">
+                        <button type="button" class="btn btn-primary btn-xs">+</button>
+                    </a>
+                </td>
+                <td>{{row.total_price}}€</td>
+                <td><a href="{{ path ('supprimerArticle', {'article_id': row.product.id}) }}">Supprimer l'article</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3>Montant total TTC : {{total}}€</h3>
+{% if total_qte > 0 %}
+    <a href="{{ path ('validationPanier') }}">Valider le panier</a> - 
+    <a href="{{ path ('viderPanier') }}">Vider l'intégralité du panier</a>
+{% endif %}
+{% endblock %}
+

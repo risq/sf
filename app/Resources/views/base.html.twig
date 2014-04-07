@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %} | Elinoix</title>
+        <link href="{{ asset('bundles/elinoixshop/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/elinoixshop/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bundles/elinoixshop/css/main.css') }}" rel="stylesheet" type="text/css" />
+        {% block custom_stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Elinoix</a>
+              </div>
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{ path ('contenuPanier')}}">Mon panier</a>
+                    </li>
+                    <li>
+                        <a href="{{ path ('logout')}}">Déconnexion ({{app.user.username}})</a>
+                    </li>
+                    {% endif %}
+
+                    {% if not is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{ path ('login')}}">Connexion</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+              </div><!--/.navbar-collapse -->
+            </div>
+          </div>
+
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          {% block jumbotron %}
+          <div class="jumbotron">
+            <div class="container">
+              <h1>{% block jumbotron_title %}Hello, world!{% endblock %}</h1>
+              {% block jumbotron_content %}
+              <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+              <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+              {% endblock %}
+            </div>
+          </div>
+          {% endblock %}
+          
+
+          <div class="container main-container">
+            {% block page_header %}
+            <div class="page-header">
+              <h1>{% block page_title %}Example page header{% endblock %} 
+              <small>{% block page_subtitle %}Subtext for header{% endblock %}</small></h1>
+            </div>
+            {% endblock %}
+              
+            <section class="content">
+            {% block body %}{% endblock %}
+            </section>
+           
+          </div> <!-- /container -->
+          
+          <div class="container">
+            <hr>
+            {% block footer %}
+            <footer>
+              <p>&copy; Elinoix 2014</p>
+            </footer>
+            {% endblock %}
+          </div> <!-- /container -->
+
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="{{ asset('bundles/elinoixshop/js/bootstrap.min.js') }}"></script>
+        {% block custom_javascripts %}{% endblock %}
+    </body>
+</html>

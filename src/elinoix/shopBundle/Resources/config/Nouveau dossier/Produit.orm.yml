@@ -1,0 +1,25 @@
+elinoix\shopBundle\Entity\Produit:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        poids:
+            type: decimal
+        prix:
+            type: decimal
+        description:
+            type: text
+        quantite:
+            type: integer
+        image:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

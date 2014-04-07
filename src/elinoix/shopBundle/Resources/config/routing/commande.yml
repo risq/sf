@@ -1,0 +1,14 @@
+commande:
+    pattern:  /
+    defaults: { _controller: "elinoixshopBundle:Commande:index" }
+
+commande_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "elinoixshopBundle:Commande:show" }
+    
+commande_validation:
+    pattern:  /{id}/validation
+    defaults: { _controller: "elinoixshopBundle:Commande:validation" }
+
+
+

@@ -1,0 +1,13 @@
+TODO
+
+commandes :
+-validation du panier
+    creation commande
+    creation ligneCommandes
+    validation quantites
+
+-validation commande
+    creation client
+    association avec commande
+
+-paiement

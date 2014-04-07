@@ -1,0 +1,43 @@
+<div class="produits">
+    {% for entity in entities %}
+    <div class="produit">
+        <div class="produit-img">
+            <img src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}"/>
+        </div>
+        <div class="produit-infos">
+            <div class="produit-nom">
+                <h3><a href="{{ path('produit_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></h3>
+            </div>
+            <hr>
+            <div class="produit-desc">
+                {{ entity.description }}
+            </div>
+            <div class="produit-poids">
+                Poids : {{ entity.poids }}Kg
+            </div>
+            <div class="produit-qte">
+                Quantité restante : 
+                {% if entity.quantite > 10 %}
+                    <span class="label label-success">{{ entity.quantite }}</span>
+                {% elseif entity.quantite > 0 %}
+                    <span class="label label-warning">{{ entity.quantite }}</span>
+                {% else %}
+                    <span class="label label-danger">{{ entity.quantite }}</span>
+                {% endif %} 
+            </div>
+            <div class="produit-achat row">
+                <div class="input-group col-xs-4 pull-right">
+                    <span class="input-group-btn">
+                        {% if entity.quantite > 0 %}
+                            <a href="{{ path ('ajoutArticle', {'article_id': entity.id, 'qte' : 1 }) }}" class="btn btn-primary" type="button">Ajouter au panier</a>
+                        {% else %}
+                            <span class="btn btn-danger" type="button">Indisponible</span>
+                        {% endif %}
+                    </span>
+                    <span class="input-group-addon produit-prix">{{ entity.prix }}€</span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

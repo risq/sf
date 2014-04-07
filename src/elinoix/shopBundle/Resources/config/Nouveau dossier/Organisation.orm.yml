@@ -1,0 +1,25 @@
+elinoix\shopBundle\Entity\Organisation:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        login:
+            type: string
+            length: 255
+        pass:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+
+    oneToMany:
+        clients:
+            targetEntity: Client
+            mappedBy: organisation

@@ -1,0 +1,38 @@
+{% if total_qte %}
+<li class="dropdown active panier-navbar">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        Mon Panier
+        <span class="badge">{{total}}€</span>
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="{{ path ('contenuPanier') }}">Accéder au panier</a></li>
+        <li class="divider"></li>
+        <li role="presentation" class="dropdown-header dropdown-header-title">
+            {% if total_qte == 1 %}
+            Contenu du panier (1 article) :
+            {% else %}
+            Contenu du panier ({{total_qte}} articles) :
+            {% endif %}
+        </li>
+
+        {% for row in rows %}
+        <li role="presentation" class="dropdown-header">
+
+            {{row.qte}}x {{row.product.name}} ({{row.product.price}}€)
+            
+            <span class="badge pull-right">
+                {{row.total_price}}€
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+
+{% else %}
+<li>
+    <a href="{{ path ('contenuPanier') }}">
+        Mon Panier
+    </a>
+</li>
+{% endif %}

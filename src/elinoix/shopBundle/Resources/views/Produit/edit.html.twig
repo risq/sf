@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+Edition d'un Produit
+{% endblock %}
+
+{% block page_title %}
+Edition d'un Produit
+{% endblock %}
+
+{% block page_subtitle %}{% endblock %}
+
+{% block body -%}
+
+    <div class="row">
+        <div class="well bs-component col-sm-6">
+            {% form_theme edit_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
+            {{ form(edit_form) }}
+        </div>
+    </div>  
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('produit') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

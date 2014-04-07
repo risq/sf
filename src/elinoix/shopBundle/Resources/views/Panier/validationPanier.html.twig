@@ -1,0 +1,36 @@
+{% extends "sil13VitrineBundle::layout.html.twig" %}
+
+{% block title %}
+Ma vitrine
+{% endblock %}
+
+{% block jumbotron %}
+    {{ render(controller('sil13VitrineBundle:Default:topVentes', {'max': 4})) }}
+{% endblock %}
+
+{% block page_header %}
+Mon panier
+{% endblock %}
+
+{% block page_header_subtext %}
+Validation de la commande
+{% endblock %}
+
+{% block content %}
+
+{% for flashMessage in app.session.flashbag.get ('panier_notice_success') %}
+<div class="alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   <strong>Effectué ! </strong> {{flashMessage}}
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get ('panier_notice_warning') %}
+<div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   {{flashMessage|raw}}
+</div>
+{% endfor %}
+Panier validé.
+{% endblock %}
+
