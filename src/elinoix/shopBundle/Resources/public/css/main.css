@@ -31,8 +31,8 @@ ul, li {
 
 .navbar-brand,
 .navbar-nav li a {
-    line-height: 60px;
-    height: 60px;
+    line-height: 50px;
+    height: 50px;
     padding-top: 0;
 }
 
@@ -55,9 +55,18 @@ h1 small {
     margin-bottom: 0;
 }
 
+.jumbotron h1 {
+    font-size: 48px;
+    margin-bottom: 4px;
+}
+.jumbotron h3 {
+    margin-top: 4px;
+}
+
 .jumbotron p {
     font-size: 16px;
 }
+
 
 .page-header {
     border-bottom: 1px solid #bf5a16;
@@ -113,7 +122,7 @@ input[type="file"] {
 }
 
 .produits .produit {
-    min-height: 220px;
+    min-height: 200px;
     padding: 10px;
     background-color: #4e5d6c;
     color: #fff;
@@ -127,9 +136,9 @@ input[type="file"] {
     color: #fff;
 }
 
-.produits .produit a:hover {
+.produits .produit h3 a:hover {
     text-decoration: none;
-    font-weight: 500;
+    color: #DF691A;
 }
 
 .produits .produit:hover {
@@ -151,7 +160,7 @@ input[type="file"] {
     padding: 0 20px;
 }
 
-.produit-infos .produit-nom h2 {
+.produit-infos .produit-nom h3 {
     margin: 4px 0;
 }
 
