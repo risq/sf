@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: 'C:/Users/val/Documents/GitHub/sf/app/config/routing_dev.yml'
