@@ -53,6 +53,10 @@ Commande
                 <th>Prixtotal</th>
                 <td>{{ entity.prixTotal }}</td>
             </tr>
+            <tr>
+                <th>Secret</th>
+                <td>{{ entity.secret }}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -61,6 +65,14 @@ Commande
         <a href="{{ path('commande') }}">
             Retourner à la liste
         </a>
+    </li>
+    <li>
+        <a href="{{ path('commande_edit', { 'id': entity.id }) }}">
+            Editer
+        </a>
+    </li>
+    <li>{% form_theme delete_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
+        {{ form(delete_form) }}
     </li>
 </ul>
 {% endblock %}

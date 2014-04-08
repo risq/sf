@@ -100,7 +100,9 @@ class PanierController extends Controller {
                 
                 $commande = new Commande();
                 $commande->setOrganisation($organisation);
-                $commande->setState("EN_ATTENTE");
+                $commande->setState("EN_ATTENTE_CREATION_CLIENT");
+                $secret = "secret123"; //TODO generate
+                $commande->setSecret($secret);
 
                 $contenuPanier = $panier->getContenu();
 
@@ -134,18 +136,18 @@ class PanierController extends Controller {
                     $commande->setPrixTotal($prixTotal);
                     $em->persist($commande);
                     $em->flush();
-                    $panier->viderPanier();
+                    //$panier->viderPanier(); //TODO : vider plus tard (validation terminee)
                     $session->set('panier', $panier);
                     $commande_id = $commande->getId();
-                    //$session->getFlashBag()->add('success', 'Le panier a été validé : la commande n°' . $commande_id . ' a été créée et sera bientôt expédiée');
-                    return $this->redirect('elinoixshopBundle:Commande:validation', array(
-                        'id'  => $commande_id));
+                    
+                    return $this->redirect($this->generateUrl('commande_validation', array(
+                        'commande_id'  => $commande_id)));
                 }
                 else {
                     $em->persist($commande);
                     $em->flush();
                     $session->getFlashBag()->add('danger', 'La commande n\'a pas pu être validée.');
-                    return $this->redirect('elinoixshopBundle:Panier:contenuPanier');
+                    return $this->redirect($this->generateUrl('contenuPanier'));
                 }     
             }
         }          

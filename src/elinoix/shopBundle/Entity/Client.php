@@ -73,7 +73,10 @@ class Client
      */
     private $organisation;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Commande", mappedBy="client")
+     */
+    protected $commandes;
 
     /**
      * Get id
@@ -244,5 +247,49 @@ class Client
     public function getOrganisation()
     {
         return $this->organisation;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add commandes
+     *
+     * @param \elinoix\shopBundle\Entity\Commande $commandes
+     * @return Client
+     */
+    public function addCommande(\elinoix\shopBundle\Entity\Commande $commandes)
+    {
+        $this->commandes[] = $commandes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove commandes
+     *
+     * @param \elinoix\shopBundle\Entity\Commande $commandes
+     */
+    public function removeCommande(\elinoix\shopBundle\Entity\Commande $commandes)
+    {
+        $this->commandes->removeElement($commandes);
+    }
+
+    /**
+     * Get commandes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+    
+    public function __toString() {
+        return $this->nom . ' ' . $this->prenom;
     }
 }

@@ -25,3 +25,5 @@ panier:
 commande: 
     resource: "@elinoixshopBundle/Resources/config/routing/commande.yml" 
     prefix : /commande
+
+#AUTRES

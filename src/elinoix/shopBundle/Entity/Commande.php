@@ -54,6 +54,19 @@ class Commande
     private $organisation;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="commandes", cascade={"persist"})
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="secret", type="string", length=255)
+     */
+     private $secret;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -227,5 +240,51 @@ class Commande
     public function getPrixTotal()
     {
         return $this->prixTotal;
+    }
+
+    /**
+     * Set secret
+     *
+     * @param string $secret
+     * @return Commande
+     */
+    public function setSecret($secret)
+    {
+        $this->secret = $secret;
+    
+        return $this;
+    }
+
+    /**
+     * Get secret
+     *
+     * @return string 
+     */
+    public function getSecret()
+    {
+        return $this->secret;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \elinoix\shopBundle\Entity\Client $client
+     * @return Commande
+     */
+    public function setClient(\elinoix\shopBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+    
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \elinoix\shopBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }

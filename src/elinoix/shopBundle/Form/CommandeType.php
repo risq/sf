@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ClientType extends AbstractType
+class CommandeType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,17 +15,7 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'repeated', array(
-                'type' => 'email',
-                'invalid_message' => 'Les adresses email doivent correspondre',
-                'options' => array('required' => true),
-                'first_options'  => array('label' => 'Email'),
-                'second_options' => array('label' => 'Email (validation)')))
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('codePostal')
-            ->add('ville')
+            ->add('client', new ClientType(), array('label' => false))
         ;
     }
     
@@ -35,7 +25,7 @@ class ClientType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'elinoix\shopBundle\Entity\Client'
+            'data_class' => 'elinoix\shopBundle\Entity\Commande'
         ));
     }
 
@@ -44,6 +34,6 @@ class ClientType extends AbstractType
      */
     public function getName()
     {
-        return 'elinoix_shopbundle_client';
+        return 'elinoix_shopbundle_commande';
     }
 }

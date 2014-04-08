@@ -42,6 +42,7 @@ Liste des Commande
                 <th>Date</th>
                 <th>State</th>
                 <th>Prixtotal</th>
+                <th>Secret</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -52,10 +53,12 @@ Liste des Commande
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.state }}</td>
                 <td>{{ entity.prixTotal }}</td>
+                <td>{{ entity.secret }}</td>
                 <td>
                 <ul>
                     <li>                        <a href="{{ path('commande_show', { 'id': entity.id }) }}"> voir </a>
                                             </li>
+                    <li>                        <a href="{{ path('commande_edit', { 'id': entity.id }) }}"> éditer </a>                    </li>
                 </ul>
                 </td>
             </tr>
@@ -63,4 +66,11 @@ Liste des Commande
         </tbody>
     </table>
 
+        <ul>
+        <li>
+            <a href="{{ path('commande_new') }}">
+                Ajouter
+            </a>
+        </li>
+    </ul>
     {% endblock %}
