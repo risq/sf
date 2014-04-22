@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-Edition d'un Commande
+Edition des informations client
 {% endblock %}
 
 {% block page_title %}
-Edition d'un Commande
+Edition des informations client
 {% endblock %}
 
 {% block page_subtitle %}{% endblock %}
@@ -42,14 +42,4 @@ Edition d'un Commande
         </div>
     </div>  
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('commande') }}">
-            Retourner à la liste
-        </a>
-    </li>
-    <li>{% form_theme delete_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
-        {{ form(delete_form) }}
-    </li>
-</ul>
 {% endblock %}

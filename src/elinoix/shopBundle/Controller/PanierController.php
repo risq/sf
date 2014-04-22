@@ -112,6 +112,7 @@ class PanierController extends Controller {
                     $ligneCommande->setProduit($produit);
                     $ligneCommande->setQuantite($qte);
                     $ligneCommande->setPrixUnitaire($produit->getPrix());
+                    $ligneCommande->setPrixTotal($produit->getPrix() * $qte);
                     $ligneCommande->setCommande($commande);
                     $em->persist($ligneCommande);
                     
@@ -139,9 +140,9 @@ class PanierController extends Controller {
                     //$panier->viderPanier(); //TODO : vider plus tard (validation terminee)
                     $session->set('panier', $panier);
                     $commande_id = $commande->getId();
-                    
+
                     return $this->redirect($this->generateUrl('commande_validation', array(
-                        'commande_id'  => $commande_id)));
+                        'id'  => $commande_id)));
                 }
                 else {
                     $em->persist($commande);

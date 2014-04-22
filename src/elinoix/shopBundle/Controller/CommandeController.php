@@ -4,7 +4,6 @@ namespace elinoix\shopBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use elinoix\shopBundle\Entity\Commande;
 use elinoix\shopBundle\Form\CommandeType;
 
@@ -12,29 +11,27 @@ use elinoix\shopBundle\Form\CommandeType;
  * Commande controller.
  *
  */
-class CommandeController extends Controller
-{
+class CommandeController extends Controller {
 
     /**
      * Lists all Commande entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('elinoixshopBundle:Commande')->findAll();
 
         return $this->render('elinoixshopBundle:Commande:index.html.twig', array(
-            'entities' => $entities,
+                    'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Commande entity.
      *
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Commande();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -48,20 +45,19 @@ class CommandeController extends Controller
         }
 
         return $this->render('elinoixshopBundle:Commande:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Commande entity.
-    *
-    * @param Commande $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Commande $entity)
-    {
+     * Creates a form to create a Commande entity.
+     *
+     * @param Commande $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Commande $entity) {
         $form = $this->createForm(new CommandeType(), $entity, array(
             'action' => $this->generateUrl('commande_create'),
             'method' => 'POST',
@@ -76,14 +72,13 @@ class CommandeController extends Controller
      * Displays a form to create a new Commande entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Commande();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('elinoixshopBundle:Commande:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -91,29 +86,28 @@ class CommandeController extends Controller
      * Finds and displays a Commande entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
+        $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
 
-        $entity = $em->getRepository('elinoixshopBundle:Commande')->find($id);
-
-        if (!$entity) {
+        if (!$commande) {
             throw $this->createNotFoundException('Unable to find Commande entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        if ($commande->getState() == "EN_ATTENTE_VALIDATION_RECAP") {
+            return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
+        }
 
         return $this->render('elinoixshopBundle:Commande:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+                    'entity' => $commande,
+        ));
     }
 
     /**
      * Displays a form to edit an existing Commande entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('elinoixshopBundle:Commande')->find($id);
@@ -123,24 +117,21 @@ class CommandeController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('elinoixshopBundle:Commande:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Commande entity.
-    *
-    * @param Commande $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Commande $entity)
-    {
+     * Creates a form to edit a Commande entity.
+     *
+     * @param Commande $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Commande $entity) {
         $form = $this->createForm(new CommandeType(), $entity, array(
             'action' => $this->generateUrl('commande_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -150,18 +141,18 @@ class CommandeController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Commande entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-
+        $session = $this->getRequest()->getSession();
         $entity = $em->getRepository('elinoixshopBundle:Commande')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Commande entity.');
+            throw $this->createNotFoundException('Impossible de valider la commande.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -169,23 +160,37 @@ class CommandeController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('commande_validation', array('id' => $id)));
+            $organisation = $this->getUser();
+
+            if ($entity->getOrganisation() != $organisation) {
+                throw $this->createNotFoundException('Impossible de valider la commande.');
+            }
+
+            if ($entity->getState() == "EN_ATTENTE_CREATION_CLIENT") { // update de la création d'un client (validation commande)
+                $entity->setState("EN_ATTENTE_VALIDATION_RECAP");
+                $em->flush();
+                $session->getFlashBag()->add('success', 'Votre compte client a bien été créé. Merci de valider les informations suivantes avant de procéder au paiement.');
+                return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
+            } else { // update de modification de données client
+                $em->flush();
+                $session->getFlashBag()->add('success', 'Les informations ont bien été modifiée.');
+                return $this->redirect($this->generateUrl('commande_show', array('id' => $id)));
+            }
         }
 
         return $this->render('elinoixshopBundle:Commande:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Commande entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -211,18 +216,16 @@ class CommandeController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commande_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('commande_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
-    
-    public function validationAction($id) //todo: ajouter secret
-    {   
+
+    public function validationAction($id) { //todo: ajouter secret
         $em = $this->getDoctrine()->getManager();
 
         $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
@@ -230,15 +233,57 @@ class CommandeController extends Controller
         if (!$commande || $commande->getState() != "EN_ATTENTE_CREATION_CLIENT") {
             throw $this->createNotFoundException('Impossible de valider cette commande.');
         }
-        
+
         $editForm = $this->createEditForm($commande);
-    
-        
+
+
         return $this->render('elinoixshopBundle:Commande:validation.html.twig', array(
-            'entity'      => $commande,
-            'edit_form'   => $editForm->createView(),
+                    'entity' => $commande,
+                    'edit_form' => $editForm->createView(),
         ));
+    }
+
+    public function recapAction($id) { //todo: ajouter secret
+        $em = $this->getDoctrine()->getManager();
+
+        $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
+
+        if (!$commande) {
+            throw $this->createNotFoundException('Impossible de valider cette commande.');
+        }
+
+        if ($commande->getState() != "EN_ATTENTE_VALIDATION_RECAP") {
+            $session->getFlashBag()->add('warning', 'La commande à déjà été validée.');
+            return $this->redirect($this->generateUrl('commande_show', array('id' => $id)));
+        }
+
+
+
+        return $this->render('elinoixshopBundle:Commande:recap.html.twig', array(
+                    'entity' => $commande,
+        ));
+    }
+
+    public function validerRecapAction($id) { //todo: ajouter secret
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->getRequest()->getSession();
+        $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
+
+        if (!$commande) {
+            throw $this->createNotFoundException('Impossible de valider cette commande.');
+        }
+
+        if ($commande->getState() != "EN_ATTENTE_VALIDATION_RECAP") {
+            $session->getFlashBag()->add('warning', 'La commande déjà été validée.');
+            return $this->redirect($this->generateUrl('commande_show', array('id' => $id)));
+        }
+
+        $commande->setState("VALIDEE_EN_ATTENTE_PAIEMENT");
+        $em->flush();
+        $session->getFlashBag()->add('success', 'La commande a été validée avec succès.');
+        return $this->redirect($this->generateUrl('commande_show', array('id' => $id)));
     }
     
     
+
 }

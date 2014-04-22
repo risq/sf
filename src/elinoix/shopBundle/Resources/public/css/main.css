@@ -67,6 +67,9 @@ h1 small {
     font-size: 16px;
 }
 
+.table-nonfluid {
+   width: auto;
+}
 
 .page-header {
     border-bottom: 1px solid #bf5a16;
@@ -110,6 +113,11 @@ thead {
 }
 
 input[type="file"] {
+    margin-left: 9px;
+    width: 94%;
+}
+
+.form-group > div > .form-group input {
     margin-left: 9px;
     width: 94%;
 }
@@ -212,3 +220,29 @@ input[type="file"] {
 table.panier-table .quantity {
     padding: .4em;
 }
+
+/*
+    COMMANDE
+*/
+#recap-commande {
+    margin-bottom: 60px;
+}
+
+#recap-commande h2 {
+    font-weight: 500;
+}
+
+#recap-commande .label {
+    font-weight: 500;
+}
+
+#recap-commande .adresse {
+    margin-top: 40px;
+    font-size: 19px;
+}
+
+a.btn {
+    margin-right: 1em;
+}
+
+

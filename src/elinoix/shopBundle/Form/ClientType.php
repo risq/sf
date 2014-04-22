@@ -20,7 +20,7 @@ class ClientType extends AbstractType
                 'invalid_message' => 'Les adresses email doivent correspondre',
                 'options' => array('required' => true),
                 'first_options'  => array('label' => 'Email'),
-                'second_options' => array('label' => 'Email (validation)')))
+                'second_options' => array('label' => 'Email (confirmation)')))
             ->add('nom')
             ->add('prenom')
             ->add('adresse')

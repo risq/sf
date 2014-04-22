@@ -5,6 +5,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+   
     public function registerBundles()
     {
         $bundles = array(
@@ -17,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new elinoix\shopBundle\elinoixshopBundle(),      
+            new Payum\Bundle\PayumBundle\PayumBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

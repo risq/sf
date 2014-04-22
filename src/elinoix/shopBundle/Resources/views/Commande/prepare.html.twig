@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <form method="POST">
+        {{ form_widget(form) }}
+
+        <input type="submit" value="Pay" />
+    </form>
+{% endblock %}
+
+{% set code = code(_self) %}

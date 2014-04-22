@@ -59,20 +59,4 @@ Commande
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('commande') }}">
-            Retourner à la liste
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('commande_edit', { 'id': entity.id }) }}">
-            Editer
-        </a>
-    </li>
-    <li>{% form_theme delete_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
-        {{ form(delete_form) }}
-    </li>
-</ul>
 {% endblock %}

@@ -65,6 +65,13 @@ class Commande
      * @ORM\Column(name="secret", type="string", length=255)
      */
      private $secret;
+     
+     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="elinoix\shopBundle\Entity\PaypalOrder", mappedBy="commande")
+     */
+     private $paypalOrders;
     
     /**
      * Get id
@@ -286,5 +293,38 @@ class Commande
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * Add paypalOrders
+     *
+     * @param \elinoix\shopBundle\Entity\PaypalOrder $paypalOrders
+     * @return Commande
+     */
+    public function addPaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders)
+    {
+        $this->paypalOrders[] = $paypalOrders;
+    
+        return $this;
+    }
+
+    /**
+     * Remove paypalOrders
+     *
+     * @param \elinoix\shopBundle\Entity\PaypalOrder $paypalOrders
+     */
+    public function removePaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders)
+    {
+        $this->paypalOrders->removeElement($paypalOrders);
+    }
+
+    /**
+     * Get paypalOrders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPaypalOrders()
+    {
+        return $this->paypalOrders;
     }
 }

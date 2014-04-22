@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+Récapitulatif de la commande
+{% endblock %}
+
+{% block page_title %}
+Récapitulatif : Commande #{{ entity.id }}
+{% endblock %}
+
+{% block page_subtitle %}
+passée le <time>{{ entity.date|date('d/m/Y à H:i') }}</time>
+{% endblock %}
+
+{% block body -%}
+
+<div class="row">
+    <div class="col-xs-12">
+            {% for flashMessage in app.session.flashbag.get('danger') %}
+        <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+        </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('warning') %}
+        <div class="alert alert-dismissable alert-warning">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+        </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-dismissable alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ flashMessage }}
+        </div>
+            {% endfor %}
+    </div>
+</div>
+
+<div id="recap-commande">
+    <h2><i class="fa fa-shopping-cart"></i> Informations commande :</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Prix Unitaire</th>
+                <th>Quantité</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for ligne in entity.ligneCommandes %}
+            <tr>
+                <td>
+                        {{ligne.produit.nom}}
+                </td>
+                <td>
+                        {{ligne.prixUnitaire}}€
+                </td>
+                <td>
+                        {{ligne.quantite}}
+                </td>
+                <td>
+                        {{ligne.prixTotal}}€
+                </td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Montant total : <span class="label label-success">{{ entity.prixTotal }}€</span></h3>
+    <h4><i class="fa fa-truck"></i> Date de livraison : 01/02/2014</h4>
+
+    <br/><br/>
+    <h2><i class="fa fa-user"></i> Informations client :</h2>
+    <h3>{{ entity.client.prenom }} {{ entity.client.nom }}</h3>
+    <h4>{{ entity.client.email }}</h4>
+    <div class="adresse">
+        <h3>Adresse : </h3>
+        {{ entity.client.adresse }}, <br/>
+        {{ entity.client.codePostal }} {{ entity.client.ville }}
+    </div>
+</div>
+
+<a href="{{ path ('commande_recap_valider', {'id': entity.id} )}}" class="btn btn-success">
+    <i class="fa fa-check"></i> Valider la commande
+</a>
+
+<a href="{{ path ('commande_edit', {'id': entity.id} )}}" class="btn btn-warning">
+    <i class="fa fa-pencil"></i> Modifier les informations client
+</a>
+{% endblock %}

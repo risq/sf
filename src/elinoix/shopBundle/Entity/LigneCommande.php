@@ -27,6 +27,13 @@ class LigneCommande
      * @ORM\Column(name="prixUnitaire", type="decimal")
      */
     private $prixUnitaire;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prixTotal", type="decimal")
+     */
+    private $prixTotal;
 
     /**
      * @var integer
@@ -148,4 +155,28 @@ class LigneCommande
     {
         return $this->commande;
     }
+
+    /**
+     * Set prixTotal
+     *
+     * @param string $prixTotal
+     * @return LigneCommande
+     */
+    public function setPrixTotal($prixTotal)
+    {
+        $this->prixTotal = $prixTotal;
+    
+        return $this;
+    }
+
+    /**
+     * Get prixTotal
+     *
+     * @return string 
+     */
+    public function getPrixTotal()
+    {
+        return $this->prixTotal;
+    }
+    
 }
