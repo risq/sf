@@ -136,7 +136,7 @@ hr {
 }
 
 section.content {
-    padding: 16px 4px 48px 4px;
+    padding: 16px 0 48px 0;
 }
 
 .well {
@@ -333,7 +333,7 @@ a.btn {
 .slider .slider-infos .slider-content {
     position: absolute;
     bottom: 50px;
-    right: 0;
+    right: 15px;
 }
 
 .slider .slider-infos .slider-content .slider-text {
