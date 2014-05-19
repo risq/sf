@@ -75,7 +75,7 @@ ul, li {
     background: url(../img/logo.png) no-repeat center top;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .navbar .navbar-nav {
         display: block;
     }
