@@ -29,20 +29,77 @@ ul, li {
     font-size: 15px;
 }
 
-.navbar-brand,
-.navbar-nav li a {
-    line-height: 50px;
-    height: 50px;
-    padding-top: 0;
+.navbar .navbar-header {
+    height: 60px;
 }
 
-.navbar-nav {
-    margin-top: 0;
-    margin-bottom: 0;
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    height: 60px !important; 
+}
+
+.navbar .navbar-nav li{
+    display: inline-block;
+    float: none;
+    width: 140px;
+    overflow: hidden;
+}
+
+.navbar .navbar-nav li a{
+    line-height: 40px;
+    height: 60px;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar .navbar-nav li.logo-container {
+    font-weight: 700;
+    width: 210px;
+    height: 60px;
+    color: #fff;
+    position: relative;
+    overflow: initial;
+}
+
+.navbar .navbar-nav li.logo-container .logo {
+    font-weight: 700;
+    width: 100%;
+    height: 140px;
+    position: absolute;
+    background: url(../img/logo.png) no-repeat center top;
+}
+
+@media (max-width: 1024px) {
+    .navbar .navbar-nav {
+        display: block;
+    }
+    .navbar .navbar-nav li {
+        display: block;
+        text-align: left;
+        width: 100%;
+    }
+    .navbar .navbar-nav li.logo-container {
+        display: none;
+    }
+    
+    .navbar .navbar-collapse {
+        height: auto !important;
+        
+    }
 }
 
 .navbar-toggle {
     margin-top: 13px;
+}
+
+section.top-section {
+    margin-top: 60px;
 }
 
 h1 small {
@@ -51,7 +108,6 @@ h1 small {
 
 .jumbotron {
     color: #fff;
-    padding-top: 0;
     margin-bottom: 0;
 }
 
@@ -72,11 +128,11 @@ h1 small {
 }
 
 .page-header {
-    border-bottom: 1px solid #bf5a16;
+    border-bottom: 1px solid #CD7B3F;
 }
 
 hr {
-    border-top: 1px solid #bf5a16;
+    border-top: 1px solid #CD7B3F;
 }
 
 section.content {
@@ -96,7 +152,7 @@ table, .table {
 }
 
 table a, .table a {
-    color: #df691a;
+    color: #CD7B3F;
 }
 
 table li, .table li {
@@ -246,3 +302,201 @@ a.btn {
 }
 
 
+/*
+    SLIDER
+*/
+
+.slider {
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-bottom: 0;
+    background: #333;
+}
+
+.slider .slider-infos {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 60px 0 0 0;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.slider .slider-infos .container{
+    position: relative;
+    height: 100%;
+}
+
+.slider .slider-infos .slider-content {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+}
+
+.slider .slider-infos .slider-content .slider-text {
+    width: 500px;
+    background-color: #fff;
+    color: #333;
+    padding: 30px;
+}
+
+.slider .slider-infos .slider-nav {
+    height: 60px;
+    margin-top: 3px;
+    text-align: right;
+}
+
+.slider .slider-infos .slider-nav .nav-button {
+    display: inline-block;
+    background-color: #fff;
+    color: #333;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    font-size: 30px;
+    padding: 15px 0;
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.slider .slider-infos .slider-nav .nav-button:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.slider .slider-infos .slider-content h2 {
+    margin-top: 0;
+}
+
+.slider > ul {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slider li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.slider .current {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1000;
+}
+
+.slider li img {
+    display: block;
+    min-width: 100%;
+    max-width: none;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.fxSoftScale .navOutNext {
+    -webkit-animation: scaleUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+    animation: scaleUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.fxSoftScale .navInNext {
+    -webkit-animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+    animation: scaleDownUp 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.fxSoftScale .navOutPrev {
+    -webkit-animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+    animation: scaleDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.fxSoftScale .navInPrev {
+    -webkit-animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+    animation: scaleUpDown 1.5s forwards cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+@-webkit-keyframes scaleUp {
+    to {
+        -webkit-transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes scaleUp {
+    to {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes scaleDownUp {
+    from {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes scaleDownUp {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes scaleDown {
+    to {
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+    }
+}
+
+@keyframes scaleDown {
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+@-webkit-keyframes scaleUpDown {
+    from {
+        -webkit-transform: scale(1.2);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes scaleUpDown {
+    from {
+        transform: scale(1.2);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
