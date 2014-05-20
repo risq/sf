@@ -10,8 +10,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            {# <div class="container"> #}
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -55,13 +55,15 @@
 
                     </ul>
                 </div><!--/.navbar-collapse -->
-            </div>
+            {# </div> #}
         </div>
 
-          {% block slider %}
+        {% block slider %}
+
+        
 
         <section class="top-section">
-            <div id="slider" class="slider fxSoftScale">
+            <div id="slider" class="slider {% if (slider_fixed_big is defined and slider_fixed_big) %} slider-fixed-big {% else %} slider-small {% endif %} fxSoftScale">
                 <ul class="itemwrap">
                     <li class="current"><img src="{{ asset('bundles/elinoixshop/img/nuts.jpg') }}" alt="img06"/></li>
                     <li><img src="{{ asset('bundles/elinoixshop/img/6.jpg') }}" alt="img06"/></li>
@@ -86,6 +88,7 @@
                             <nav class="slider-nav">
                                 <div class="nav-button fa fa-arrow-left  fa-fw nav-prev"></div> 
                                 <div class="nav-button fa fa-arrow-right fa-fw nav-next"></div>
+                                <div class="nav-button fa fa-plus fa-fw nav-expand"></div>
                             </nav>
                         </div>
                     </div>

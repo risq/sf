@@ -16,13 +16,14 @@
             nav = component.querySelector('.slider-nav'),
             navNext = nav.querySelector('.nav-next'),
             navPrev = nav.querySelector('.nav-prev'),
+            navExpand = nav.querySelector('.nav-expand'),
             isAnimating = false;
 
     function init() {
         navNext.addEventListener( 'click', function( ev ) { ev.preventDefault(); navigate( 'next' ); } );
-	navPrev.addEventListener( 'click', function( ev ) { ev.preventDefault(); navigate( 'prev' ); } );
+        navPrev.addEventListener( 'click', function( ev ) { ev.preventDefault(); navigate( 'prev' ); } );
+        navExpand.addEventListener( 'click', toggleExpand );
     }
-
 
     function navigate(dir) {
         if (isAnimating)
@@ -75,6 +76,20 @@
 
         $(currentItem).addClass(dir === 'next' ? 'navOutNext' : 'navOutPrev');
         $(nextItem).addClass(dir === 'next' ? 'navInNext' : 'navInPrev');
+    }
+
+    function toggleExpand() {
+        $(sliderInfos).fadeOut(300, function() {
+            if ($(component).hasClass('slider-small')) {
+                $(component).removeClass('slider-small');
+                $(navExpand).removeClass('fa-plus').addClass('fa-minus');
+            }
+            else {
+                $(component).addClass('slider-small');
+                $(navExpand).removeClass('fa-minus').addClass('fa-plus');
+            }
+            $(this).fadeIn();
+        });
     }
 
     init();

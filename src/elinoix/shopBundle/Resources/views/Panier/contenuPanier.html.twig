@@ -54,11 +54,11 @@ Mon panier
                 </td>
                 <td>{{row.product.prix}}€</td>
                 <td><a href="{{ path ('soustraitArticle', {'article_id': row.product.id}) }}">
-                        <button type="button" class="btn btn-primary btn-xs">-</button>
+                        <button type="button" class="btn btn-default btn-xs">-</button>
                     </a>
                     <span class="quantity">{{row.qte}}</span> 
                     <a href="{{ path ('ajoutArticle', {'article_id': row.product.id, 'qte' : 1 }) }}">
-                        <button type="button" class="btn btn-primary btn-xs">+</button>
+                        <button type="button" class="btn btn-default btn-xs">+</button>
                     </a>
                 </td>
                 <td>{{row.total_price}}€</td>
