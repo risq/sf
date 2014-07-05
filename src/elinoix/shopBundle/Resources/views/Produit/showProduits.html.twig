@@ -1,4 +1,5 @@
 <div class="produits">
+    {#
     {% for entity in entities %}
     <div class="produit">
         <div class="produit-img">
@@ -40,4 +41,37 @@
         </div>
     </div>
     {% endfor %}
+    #}
+
+    <div id="produit-slider" class="row no-gutter fxSlideForward">
+        <div class="col-sm-6">
+            <ul class="itemwrap">
+                {% for entity in entities %}
+                <li class="{% if loop.first %}current{% endif %}" data-nom="{{ entity.nom }}" data-description="{{ entity.description }}" data-poids="{{ entity.poids }}Kg" data-quantite="disponible" data-prix="{{ entity.prix }}€">
+                    <img class="img-responsive" src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}"/>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <div id="produit-slider-infos" class="slider-infos fxSlideForward">
+                <div class="slider-content">
+                    <h3>
+                        <span class="produit-nom">{{entities|first.nom}}</span>
+                        <span class="pull-right produit-prix">{{entities|first.prix}}€</span>
+                    </h3>
+                    <div class="produit-description">
+                        {{entities|first.description}}
+                    </div>
+                    <hr>
+                    <div class="produit-poids-container">Poids: <span class="produit-poids">{{entities|first.poids}}Kg</span></div>
+                    <div class="produit-quantite label label-success">disponible</div>
+                    <nav class="slider-nav">
+                        <div class="nav-button fa fa-arrow-left fa-fw nav-prev"></div>
+                        <div class="nav-button fa fa-arrow-right fa-fw nav-next"></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
