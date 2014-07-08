@@ -1,9 +1,8 @@
 <div class="produits">
-    {#
-    {% for entity in entities %}
+    {# {% for entity in entities %}
     <div class="produit">
         <div class="produit-img">
-            <img src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}"/>
+            <img src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}" />
         </div>
         <div class="produit-infos">
             <div class="produit-nom">
@@ -17,14 +16,13 @@
                 Poids : {{ entity.poids }}Kg
             </div>
             <div class="produit-qte">
-                Quantité restante : 
-                {% if entity.quantite > 10 %}
-                    <span class="label label-success">{{ entity.quantite }}</span>
+                Quantité restante : {% if entity.quantite > 10 %}
+                <span class="label label-success">{{ entity.quantite }}</span>
                 {% elseif entity.quantite > 0 %}
-                    <span class="label label-warning">{{ entity.quantite }}</span>
+                <span class="label label-warning">{{ entity.quantite }}</span>
                 {% else %}
-                    <span class="label label-danger">{{ entity.quantite }}</span>
-                {% endif %} 
+                <span class="label label-danger">{{ entity.quantite }}</span>
+                {% endif %}
             </div>
             <div class="produit-achat row">
                 <div class="input-group col-xs-4 pull-right">
@@ -33,44 +31,54 @@
                             <a href="{{ path ('ajoutArticle', {'article_id': entity.id, 'qte' : 1 }) }}" class="btn btn-default" type="button">Ajouter au panier</a>
                         {% else %}
                             <span class="btn btn-danger" type="button">Indisponible</span>
-                        {% endif %}
+                    {% endif %}
                     </span>
                     <span class="input-group-addon produit-prix">{{ entity.prix }}€</span>
-                </div><!-- /input-group -->
+                </div>
+                <!-- /input-group -->
             </div>
         </div>
     </div>
-    {% endfor %}
-    #}
+    {% endfor %} #}
 
     <div id="produit-slider" class="row no-gutter fxSlideForward">
-        <div class="col-sm-6">
-            <ul class="itemwrap">
-                {% for entity in entities %}
-                <li class="{% if loop.first %}current{% endif %}" data-nom="{{ entity.nom }}" data-description="{{ entity.description }}" data-poids="{{ entity.poids }}Kg" data-quantite="disponible" data-prix="{{ entity.prix }}€">
-                    <img class="img-responsive" src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}"/>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="col-sm-6">
-            <div id="produit-slider-infos" class="slider-infos fxSlideForward">
-                <div class="slider-content">
-                    <h3>
-                        <span class="produit-nom">{{entities|first.nom}}</span>
-                        <span class="pull-right produit-prix">{{entities|first.prix}}€</span>
-                    </h3>
-                    <div class="produit-description">
-                        {{entities|first.description}}
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="itemwrap">
+                    {% for entity in entities %}
+                    <li class="{% if loop.first %}current{% endif %}" data-nom="{{ entity.nom }}" data-description="{{ entity.description }}" data-poids="{{ entity.poids }}Kg" data-quantite="disponible" data-prix="{{ entity.prix }}€" data-lien-panier="{{ path ('ajoutArticle', {'article_id': entity.id, 'qte' : 1 }) }}">
+                        <img class="img-responsive" src="{{ asset('upload/'~entity.image.id~'/'~entity.image.image)}}" alt="{{ entity.nom }}" />
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <div id="produit-slider-infos" class="slider-infos fxSlideForward">
+                    <div class="slider-content">
+                        <h3>
+                            <span class="produit-nom">{{entities|first.nom}}</span>
+                            <span class="pull-right produit-prix">{{entities|first.prix}}€</span>
+                        </h3>
+                        <div class="produit-description">
+                            {{entities|first.description}}
+                        </div>
+                        <hr>
+                        <div class="produit-poids-container">Poids : <span class="produit-poids">{{entities|first.poids}}Kg</span>
+                        </div>
+                        <div>Disponibilité : <span class="produit-quantite label label-success">disponible</span></div>
+                        <br/>
+                        <a href="{{ path ('ajoutArticle', {'article_id': entities|first.id, 'qte' : 1 }) }}" class="produit-lien-panier btn btn-default" type="button">Ajouter au panier</a>
                     </div>
-                    <hr>
-                    <div class="produit-poids-container">Poids: <span class="produit-poids">{{entities|first.poids}}Kg</span></div>
-                    <div class="produit-quantite label label-success">disponible</div>
-                    <nav class="slider-nav">
-                        <div class="nav-button fa fa-arrow-left fa-fw nav-prev"></div>
-                        <div class="nav-button fa fa-arrow-right fa-fw nav-next"></div>
-                    </nav>
-                </div>
+                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <nav class="produit-slider-nav">
+                    <div class="nav-button fa fa-arrow-left fa-fw nav-prev"></div>
+                    <div class="nav-button-text">Voir les produits</div>
+                    <div class="nav-button fa fa-arrow-right fa-fw nav-next"></div>
+                </nav>
             </div>
         </div>
     </div>

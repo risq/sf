@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-Liste des Commande
+Affichage d'un Livraison
 {% endblock %}
 
 {% block page_title %}
-Liste des Commande
+Livraison
 {% endblock %}
 
 {% block page_subtitle %}{% endblock %}
@@ -35,35 +35,32 @@ Liste des Commande
         </div>
     </div>
 
-    <table class="records_list table">
-        <thead>
+    <table class="record_properties table">
+        <tbody>
             <tr>
                 <th>Id</th>
-                <th>Date</th>
-                <th>State</th>
-                <th>Prixtotal</th>
-                <th>Secret</th>
-                <th>Actions</th>
+                <td>{{ entity.id }}</td>
             </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('commande_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.state }}</td>
-                <td>{{ entity.prixTotal }}</td>
-                <td>{{ entity.secret }}</td>
-                <td>
-                <ul>
-                    <li>                        <a href="{{ path('commande_show', { 'id': entity.id }) }}"> voir </a>
-                                            </li>
-                    <li>                        <a href="{{ path('commande_edit', { 'id': entity.id }) }}"> éditer </a>                    </li>
-                </ul>
-                </td>
+                <th>Jour</th>
+                <td>{{ entity.jour|date('Y-m-d H:i:s') }}</td>
             </tr>
-        {% endfor %}
         </tbody>
     </table>
 
-    {% endblock %}
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('livraison') }}">
+            Retourner à la liste
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('livraison_edit', { 'id': entity.id }) }}">
+            Editer
+        </a>
+    </li>
+    <li>{% form_theme delete_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
+        {{ form(delete_form) }}
+    </li>
+</ul>
+{% endblock %}

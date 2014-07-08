@@ -1,11 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-Liste des Commande
+Liste des Livraison
 {% endblock %}
 
 {% block page_title %}
-Liste des Commande
+Liste des Livraison
 {% endblock %}
 
 {% block page_subtitle %}{% endblock %}
@@ -39,26 +39,22 @@ Liste des Commande
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Date</th>
-                <th>State</th>
-                <th>Prixtotal</th>
-                <th>Secret</th>
+                <th>Organisation</th>
+                <th>Jour</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('commande_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.state }}</td>
-                <td>{{ entity.prixTotal }}</td>
-                <td>{{ entity.secret }}</td>
+                <td><a href="{{ path('livraison_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.organisation %}{{ entity.organisation }}{% endif %}</td>
+                <td>{% if entity.jour %}{{ entity.jour|date('d/m/Y') }}{% endif %}</td>
                 <td>
                 <ul>
-                    <li>                        <a href="{{ path('commande_show', { 'id': entity.id }) }}"> voir </a>
+                    <li>                        <a href="{{ path('livraison_show', { 'id': entity.id }) }}"> voir </a>
                                             </li>
-                    <li>                        <a href="{{ path('commande_edit', { 'id': entity.id }) }}"> éditer </a>                    </li>
+                    <li>                        <a href="{{ path('livraison_edit', { 'id': entity.id }) }}"> éditer </a>                    </li>
                 </ul>
                 </td>
             </tr>
@@ -66,4 +62,11 @@ Liste des Commande
         </tbody>
     </table>
 
+        <ul>
+        <li>
+            <a href="{{ path('livraison_new') }}">
+                Ajouter
+            </a>
+        </li>
+    </ul>
     {% endblock %}

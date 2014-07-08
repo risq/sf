@@ -13,7 +13,7 @@
     items = component.querySelector('ul.itemwrap').children,
     current = 0,
     itemsCount = items.length,
-    nav = component.querySelector('.slider-nav'),
+    nav = component.querySelector('.produit-slider-nav'),
     navNext = nav.querySelector('.nav-next'),
     navPrev = nav.querySelector('.nav-prev'),
     isAnimating = false;
@@ -79,6 +79,7 @@
             $(sliderInfos).find('.produit-poids').text($(nextItem).data('poids'));
             $(sliderInfos).find('.produit-quantite').text($(nextItem).data('quantite'));
             $(sliderInfos).find('.produit-prix').text($(nextItem).data('prix'));
+            $(sliderInfos).find('.produit-lien-panier').attr('href', $(nextItem).data('lien-panier'));
             $(this).fadeIn();
         });
     }

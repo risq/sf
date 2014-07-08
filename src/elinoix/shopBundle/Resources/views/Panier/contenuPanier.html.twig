@@ -48,7 +48,7 @@ Mon panier
         {% for row in rows %}
             <tr>
                 <td>
-                    <a href="{{ path ('produit', {'product_id': row.product.id }) }}">
+                    <a href="{{ path ('produit_show', {'id': row.product.id }) }}">
                         {{row.product.nom}}
                     </a>
                 </td>

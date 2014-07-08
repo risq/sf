@@ -1,0 +1,30 @@
+livraison:
+    pattern:  /
+    defaults: { _controller: "elinoixshopBundle:Livraison:index" }
+
+livraison_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "elinoixshopBundle:Livraison:show" }
+
+livraison_new:
+    pattern:  /new
+    defaults: { _controller: "elinoixshopBundle:Livraison:new" }
+
+livraison_create:
+    pattern:  /create
+    defaults: { _controller: "elinoixshopBundle:Livraison:create" }
+    requirements: { _method: post }
+
+livraison_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "elinoixshopBundle:Livraison:edit" }
+
+livraison_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "elinoixshopBundle:Livraison:update" }
+    requirements: { _method: post|put }
+
+livraison_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "elinoixshopBundle:Livraison:delete" }
+    requirements: { _method: post|delete }

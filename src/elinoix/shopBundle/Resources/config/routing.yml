@@ -26,4 +26,7 @@ commande:
     resource: "@elinoixshopBundle/Resources/config/routing/commande.yml" 
     prefix : /commande
 
+livraison:
+        resource: "@elinoixshopBundle/Resources/config/routing/livraison.yml"
+        prefix:   /livraison
 #AUTRES

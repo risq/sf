@@ -106,6 +106,11 @@ ul, li {
     }
 }
 
+.date-form .col-md-9 {
+    display: inline-block;
+    width: auto;
+}
+
 .navbar-toggle {
     margin-top: 8px;
 }
@@ -152,7 +157,9 @@ section.content {
 }
 
 .well {
-    color: #fff;
+    background-color: #d7bead;
+    color: #222;
+    margin: 10px;
 }
 
 label {
@@ -500,34 +507,44 @@ a.btn {
     margin-bottom: 3px;
 }
 
-#produit-slider .slider-infos .slider-nav {
+#produit-slider .produit-slider-nav {
     height: 60px;
     display: inline-block;
-    float: right;
+    text-align: center;
+    width: 100%;
 }
 
-#produit-slider .slider-infos .slider-nav .nav-button {
+#produit-slider .produit-slider-nav .nav-button {
     display: inline-block;
     background-color: #fff;
     color: #8D4C24;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     text-align: center;
-    font-size: 30px;
-    line-height: 60px;
+    font-size: 25px;
+    line-height: 50px;
     -webkit-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
     cursor: pointer;
 }
 
-#produit-slider .slider-infos .slider-nav .nav-button:hover {
+#produit-slider .produit-slider-nav .nav-button:hover {
     background-color: #8D4C24;
     color: #fff;
 }
 
-#produit-slider .slider-infos .slider-nav .nav-button:active {
+#produit-slider .produit-slider-nav .nav-button:active {
     background-color: #fff;
     color: #8D4C24;
+}
+
+#produit-slider .produit-slider-nav .nav-button-text {
+    display: inline-block;
+    color: #8D4C24;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    margin: 0 10px;
 }
 
 #produit-slider .slider-infos .slider-content h3 {

@@ -152,7 +152,7 @@ class CommandeController extends Controller {
         $entity = $em->getRepository('elinoixshopBundle:Commande')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Impossible de valider la commande.');
+            throw $this->createNotFoundException('Impossible de valider la commande. Veuillez réessayer.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -164,18 +164,24 @@ class CommandeController extends Controller {
             $organisation = $this->getUser();
 
             if ($entity->getOrganisation() != $organisation) {
-                throw $this->createNotFoundException('Impossible de valider la commande.');
+                throw $this->createNotFoundException('Impossible de valider la commande. Veuillez réessayer.');
             }
 
             if ($entity->getState() == "EN_ATTENTE_CREATION_CLIENT") { // update de la création d'un client (validation commande)
                 $entity->setState("EN_ATTENTE_VALIDATION_RECAP");
+                //$entity->setState("EN_ATTENTE_SELECTION_LIVRAISON");
                 $em->flush();
                 $session->getFlashBag()->add('success', 'Votre compte client a bien été créé. Merci de valider les informations suivantes avant de procéder au paiement.');
+                //$session->getFlashBag()->add('success', 'Votre compte client a bien été créé. Merci de votre moyen de livraison.');
                 return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
-            } else { // update de modification de données client
+                //return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
+            } else if ($entity->getState() == "EN_ATTENTE_VALIDATION_RECAP") { // update de modification de données client
                 $em->flush();
-                $session->getFlashBag()->add('success', 'Les informations ont bien été modifiée.');
+                $session->getFlashBag()->add('success', 'Les informations ont bien été modifiées.');
                 return $this->redirect($this->generateUrl('commande_show', array('id' => $id)));
+            }
+            else {
+                throw $this->createNotFoundException('Impossible de valider la commande. Veuillez réessayer...');
             }
         }
 
@@ -231,15 +237,38 @@ class CommandeController extends Controller {
         $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
 
         if (!$commande || $commande->getState() != "EN_ATTENTE_CREATION_CLIENT") {
-            throw $this->createNotFoundException('Impossible de valider cette commande.');
+            if ($commande->getState() == "EN_ATTENTE_VALIDATION_RECAP") {
+                return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
+            }
+            else {
+                throw $this->createNotFoundException('Impossible de valider cette commande.');
+            }
         }
 
         $editForm = $this->createEditForm($commande);
 
-
         return $this->render('elinoixshopBundle:Commande:validation.html.twig', array(
-                    'entity' => $commande,
-                    'edit_form' => $editForm->createView(),
+            'entity' => $commande,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+    public function selectLivraisonAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
+
+        if (!$commande || $commande->getState() != "EN_ATTENTE_CREATION_CLIENT") {
+            if ($commande->getState() == "EN_ATTENTE_VALIDATION_RECAP") {
+                return $this->redirect($this->generateUrl('commande_recap', array('id' => $id)));
+            }
+            else {
+                throw $this->createNotFoundException('Impossible de valider cette commande. Veuillez réessayer.');
+            }
+        }
+
+        return $this->render('elinoixshopBundle:Commande:selectLivraison.html.twig', array(
+            'entity' => $commande
         ));
     }
 
@@ -249,7 +278,7 @@ class CommandeController extends Controller {
         $commande = $em->getRepository('elinoixshopBundle:Commande')->find($id);
 
         if (!$commande) {
-            throw $this->createNotFoundException('Impossible de valider cette commande.');
+            throw $this->createNotFoundException('Impossible de valider cette commande. Veuillez réessayer.');
         }
 
         if ($commande->getState() != "EN_ATTENTE_VALIDATION_RECAP") {
@@ -260,7 +289,7 @@ class CommandeController extends Controller {
 
 
         return $this->render('elinoixshopBundle:Commande:recap.html.twig', array(
-                    'entity' => $commande,
+            'entity' => $commande,
         ));
     }
 
