@@ -4,18 +4,18 @@ payum:
             elinoix\shopBundle\Entity\PaymentSecurityToken:
                 doctrine:
                     driver: orm
-
-    contexts:
-        paypal_express_checkout_and_doctrine_orm:
-            paypal_express_checkout_nvp:
-                api:
-                    options:
-                        username:  valentin.ledrapier_api1.gmail.com
-                        password:  T7FC7BMLL59AUN4N
-                        signature: AY-QcgZuolj0mmVbhPkHI4Pjd7OJAeZUWcWplTiGWnMU8l6GfTgD63Nx
-                        sandbox: true
-
-            storages:
-                elinoix\shopBundle\Entity\PaymentDetails:
-                    doctrine:
-                        driver: orm
+#
+#    contexts:
+#        paypal_express_checkout_and_doctrine_orm:
+#            paypal_express_checkout_nvp:
+#                api:
+#                    options:
+#                        username:  valentin.ledrapier_api1.gmail.com
+#                        password:  T7FC7BMLL59AUN4N
+#                        signature: AY-QcgZuolj0mmVbhPkHI4Pjd7OJAeZUWcWplTiGWnMU8l6GfTgD63Nx
+#                        sandbox: true
+#
+#            storages:
+#                elinoix\shopBundle\Entity\PaymentDetails:
+#                    doctrine:
+#                        driver: orm
