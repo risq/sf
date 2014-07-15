@@ -1,6 +1,6 @@
 parameters:
     database_driver:   pdo_mysql
-    database_host:     elinoix.mysql.eu1.frbit.com
+    database_host:     localhost
     database_port:     3306
     database_name:     elinoix
     database_user:     elinoix
