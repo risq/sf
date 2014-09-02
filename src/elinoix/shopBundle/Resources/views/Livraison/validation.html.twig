@@ -1,14 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}
-Création d'un Livraison
+Validation du mode de livraison
 {% endblock %}
 
 {% block page_title %}
-Création d'un Livraison
+Validation du mode de livraison
 {% endblock %}
 
-{% block page_subtitle %}Etape 2{% endblock %}
+{% block page_subtitle %}
+Choix du mode de livraison{% endblock %}
 
 {% block body -%}
 
@@ -35,19 +36,40 @@ Création d'un Livraison
         </div>
     </div>
 
+    Afin de valider votre commande, merci de choisir le mode de livraison :
+    <br/>
     <div class="row">
-        <div class="well bs-component col-sm-6">
-            {% form_theme form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
-            {{ form(form) }}
+        <div class="well bs-component col-sm-9 col-md-7">
+            {% form_theme edit_form 'elinoixshopBundle:Form:bootstrap-form.html.twig' %}
+            {{ form(edit_form) }}
         </div>
-    </div>
+    </div> 
+    {#<table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ entity.state }}</td>
+            </tr>
+            <tr>
+                <th>Prixtotal</th>
+                <td>{{ entity.prixTotal }}</td>
+            </tr>
+        </tbody>
+    </table>#}
 
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('livraison') }}">
-            Retourner à la liste
-        </a>
-    </li>
-</ul>
+{#  <ul class="record_actions">
+        <li>
+            <a href="{{ path('commande') }}">
+                Retourner à la liste
+            </a>
+        </li>
+    </ul>#}
 {% endblock %}

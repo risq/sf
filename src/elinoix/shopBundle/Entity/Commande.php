@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Commande
-{
+class Commande {
+
     /**
      * @var integer
      *
@@ -34,7 +34,7 @@ class Commande
      * @ORM\Column(name="state", type="string", length=255)
      */
     private $state;
-    
+
     /**
      * @var string
      *
@@ -46,41 +46,49 @@ class Commande
      * @ORM\OneToMany(targetEntity="LigneCommande", mappedBy="commande")
      */
     protected $ligneCommandes;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Organisation", inversedBy="commandes")
      * @ORM\JoinColumn(name="organisation_id", referencedColumnName="id")
      */
     private $organisation;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="commandes", cascade={"persist"})
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      */
     private $client;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Livraison", mappedBy="commande", cascade={"persist","remove"})
+     */
+    private $livraison;
+
     /**
      * @var string
      *
      * @ORM\Column(name="secret", type="string", length=255)
      */
-     private $secret;
-     
-     /**
+    private $secret;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="elinoix\shopBundle\Entity\PaypalOrder", mappedBy="commande")
      */
-     private $paypalOrders;
-    
+    private $paypalOrders;
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
+    }
+    
+    public function __toString() {
+        return "".$this->getId();
     }
 
     /**
@@ -89,8 +97,7 @@ class Commande
      * @param \DateTime $date
      * @return Commande
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -101,8 +108,7 @@ class Commande
      *
      * @return \DateTime 
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -112,8 +118,7 @@ class Commande
      * @param string $state
      * @return Commande
      */
-    public function setState($state)
-    {
+    public function setState($state) {
         $this->state = $state;
 
         return $this;
@@ -124,17 +129,16 @@ class Commande
      *
      * @return string 
      */
-    public function getState()
-    {
+    public function getState() {
         return $this->state;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->date = new \DateTime('NOW'); 
+        $this->date = new \DateTime('NOW');
     }
 
     /**
@@ -143,8 +147,7 @@ class Commande
      * @param \elinoix\shopBundle\Entity\LigneCommande $products
      * @return Commande
      */
-    public function addProduct(\elinoix\shopBundle\Entity\LigneCommande $products)
-    {
+    public function addProduct(\elinoix\shopBundle\Entity\LigneCommande $products) {
         $this->products[] = $products;
 
         return $this;
@@ -155,8 +158,7 @@ class Commande
      *
      * @param \elinoix\shopBundle\Entity\LigneCommande $products
      */
-    public function removeProduct(\elinoix\shopBundle\Entity\LigneCommande $products)
-    {
+    public function removeProduct(\elinoix\shopBundle\Entity\LigneCommande $products) {
         $this->products->removeElement($products);
     }
 
@@ -165,8 +167,7 @@ class Commande
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProducts()
-    {
+    public function getProducts() {
         return $this->products;
     }
 
@@ -176,8 +177,7 @@ class Commande
      * @param \elinoix\shopBundle\Entity\LigneCommande $ligneCommandes
      * @return Commande
      */
-    public function addLigneCommande(\elinoix\shopBundle\Entity\LigneCommande $ligneCommandes)
-    {
+    public function addLigneCommande(\elinoix\shopBundle\Entity\LigneCommande $ligneCommandes) {
         $this->ligneCommandes[] = $ligneCommandes;
 
         return $this;
@@ -188,8 +188,7 @@ class Commande
      *
      * @param \elinoix\shopBundle\Entity\LigneCommande $ligneCommandes
      */
-    public function removeLigneCommande(\elinoix\shopBundle\Entity\LigneCommande $ligneCommandes)
-    {
+    public function removeLigneCommande(\elinoix\shopBundle\Entity\LigneCommande $ligneCommandes) {
         $this->ligneCommandes->removeElement($ligneCommandes);
     }
 
@@ -198,8 +197,7 @@ class Commande
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getLigneCommandes()
-    {
+    public function getLigneCommandes() {
         return $this->ligneCommandes;
     }
 
@@ -209,8 +207,7 @@ class Commande
      * @param \elinoix\shopBundle\Entity\Organisation $organisation
      * @return Commande
      */
-    public function setOrganisation(\elinoix\shopBundle\Entity\Organisation $organisation = null)
-    {
+    public function setOrganisation(\elinoix\shopBundle\Entity\Organisation $organisation = null) {
         $this->organisation = $organisation;
 
         return $this;
@@ -221,8 +218,7 @@ class Commande
      *
      * @return \elinoix\shopBundle\Entity\Organisation 
      */
-    public function getOrganisation()
-    {
+    public function getOrganisation() {
         return $this->organisation;
     }
 
@@ -232,8 +228,7 @@ class Commande
      * @param string $prixTotal
      * @return Commande
      */
-    public function setPrixTotal($prixTotal)
-    {
+    public function setPrixTotal($prixTotal) {
         $this->prixTotal = $prixTotal;
 
         return $this;
@@ -244,8 +239,7 @@ class Commande
      *
      * @return string 
      */
-    public function getPrixTotal()
-    {
+    public function getPrixTotal() {
         return $this->prixTotal;
     }
 
@@ -255,10 +249,9 @@ class Commande
      * @param string $secret
      * @return Commande
      */
-    public function setSecret($secret)
-    {
+    public function setSecret($secret) {
         $this->secret = $secret;
-    
+
         return $this;
     }
 
@@ -267,8 +260,7 @@ class Commande
      *
      * @return string 
      */
-    public function getSecret()
-    {
+    public function getSecret() {
         return $this->secret;
     }
 
@@ -278,10 +270,9 @@ class Commande
      * @param \elinoix\shopBundle\Entity\Client $client
      * @return Commande
      */
-    public function setClient(\elinoix\shopBundle\Entity\Client $client = null)
-    {
+    public function setClient(\elinoix\shopBundle\Entity\Client $client = null) {
         $this->client = $client;
-    
+
         return $this;
     }
 
@@ -290,8 +281,7 @@ class Commande
      *
      * @return \elinoix\shopBundle\Entity\Client 
      */
-    public function getClient()
-    {
+    public function getClient() {
         return $this->client;
     }
 
@@ -301,10 +291,9 @@ class Commande
      * @param \elinoix\shopBundle\Entity\PaypalOrder $paypalOrders
      * @return Commande
      */
-    public function addPaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders)
-    {
+    public function addPaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders) {
         $this->paypalOrders[] = $paypalOrders;
-    
+
         return $this;
     }
 
@@ -313,8 +302,7 @@ class Commande
      *
      * @param \elinoix\shopBundle\Entity\PaypalOrder $paypalOrders
      */
-    public function removePaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders)
-    {
+    public function removePaypalOrder(\elinoix\shopBundle\Entity\PaypalOrder $paypalOrders) {
         $this->paypalOrders->removeElement($paypalOrders);
     }
 
@@ -323,8 +311,41 @@ class Commande
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPaypalOrders()
-    {
+    public function getPaypalOrders() {
         return $this->paypalOrders;
+    }
+
+
+    /**
+     * Add livraison
+     *
+     * @param \elinoix\shopBundle\Entity\Livraison $livraison
+     * @return Commande
+     */
+    public function addLivraison(\elinoix\shopBundle\Entity\Livraison $livraison)
+    {
+        $this->livraison[] = $livraison;
+
+        return $this;
+    }
+
+    /**
+     * Remove livraison
+     *
+     * @param \elinoix\shopBundle\Entity\Livraison $livraison
+     */
+    public function removeLivraison(\elinoix\shopBundle\Entity\Livraison $livraison)
+    {
+        $this->livraison->removeElement($livraison);
+    }
+
+    /**
+     * Get livraison
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLivraison()
+    {
+        return $this->livraison;
     }
 }

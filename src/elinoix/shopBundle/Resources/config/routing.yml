@@ -1,10 +1,6 @@
 home:
-    pattern:  /
-    defaults: { _controller: elinoixshopBundle:Default:index }
-    
-login_redirect:
-    pattern: /login_redirect
-    defaults: { _controller: elinoixshopBundle:Security:login_redirect }
+    pattern:  /home
+    defaults: { _controller: elinoixshopBundle:Default:index }   
     
 produit:
     resource: "@elinoixshopBundle/Resources/config/routing/produit.yml"

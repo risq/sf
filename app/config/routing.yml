@@ -1,16 +1,6 @@
 elinoixshop:
     resource: "@elinoixshopBundle/Resources/config/routing.yml"
     prefix:   /
-
-login:
-    pattern: /login
-    defaults: { _controller: elinoixshopBundle:Security:login }
-    
-login_check:
-    pattern: /login_check
-    
-logout:
-    pattern: /logout
     
 payum_capture:
     resource: "@PayumBundle/Resources/config/routing/capture.xml"
@@ -21,3 +11,34 @@ payum_notify:
 payment_done:
     pattern:  /payment_done
     defaults: { _controller: "elinoixshopBundle:Paiement:captureDone" }
+    
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile        
+  
+forbidden:
+    pattern: /forbidden
+    defaults: { _controller: elinoixshopBundle:Index:forbidden }
+ 
+error403:
+    pattern: /error403
+    defaults: { _controller: elinoixshopBundle:Index:error403 }    
+    
+login:
+  pattern: /login
+  defaults: { _controller: elinoixshopBundle:Security:login }      

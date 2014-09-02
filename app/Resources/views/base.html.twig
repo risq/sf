@@ -6,61 +6,61 @@
         <link href="{{ asset('bundles/elinoixshop/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('bundles/elinoixshop/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('bundles/elinoixshop/css/main.css') }}" rel="stylesheet" type="text/css" />
-        {% block custom_stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            {# <div class="container"> #}
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-{#                    <a class="navbar-brand" href="#">Elinoix</a>#}
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-
-                        <li>
-                          {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path ('organisation_show', {'id': app.user.id} )}}">Accueil Membre</a>
-                          {% endif %}
-                        </li>
-
-
-                        <li>
-                            {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path ('contenuPanier')}}">Mon panier</a>
-                            {% endif %}
-                        </li>
-                        <li class="logo-container">
-                            <div class="logo"></div>
-                        </li>
-                        <li>
-                            
-                        </li>
-                        <li>
-                            {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path ('logout')}}">Déconnexion ({{app.user.username}})</a>
-                            {% else %}
-                             <a href="{{ path ('login')}}">Connexion</a>
-                            {% endif %}
-                        </li>
-
-                        
-
-
-                    </ul>
-                </div><!--/.navbar-collapse -->
-            {# </div> #}
+    {% block custom_stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        {# <div class="container"> #}
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {#                    <a class="navbar-brand" href="#">Elinoix</a>#}
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
 
-        {% block slider %}
+                <li>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path ('organisation_show', {'id': app.user.id} )}}">Accueil Membre</a>
+                    {% endif %}
+                </li>
 
-        
+
+                <li>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path ('contenuPanier')}}">Mon panier</a>
+                    {% endif %}
+                </li>
+                <li class="logo-container">
+                    <div class="logo"></div>
+                </li>
+                <li>
+
+                </li>
+                <li>
+                    {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path ('fos_user_security_logout')}}">Déconnexion ({{app.user.username}})</a>
+                    {% else %}
+                        <a href="{{ path ('login')}}">Connexion</a>
+                    {% endif %}
+                </li>
+
+
+
+
+            </ul>
+        </div><!--/.navbar-collapse -->
+        {# </div> #}
+    </div>
+
+    {% block slider %}
+
+
 
         <section class="top-section">
             <div id="slider" class="slider {% if (slider_fixed_big is defined and slider_fixed_big) %} slider-fixed-big {% else %} slider-small {% endif %} fxSoftScale">
@@ -70,7 +70,7 @@
                     <li><img src="{{ asset('bundles/elinoixshop/img/7.jpg') }}" alt="img07"/></li>
                     <li><img src="{{ asset('bundles/elinoixshop/img/8.jpg') }}" alt="img08"/></li>
                 </ul>
-                
+
                 <div id="slider-infos" class="slider-infos fxSoftScale">
                     <div class="container">
                         <div class="slider-content">
@@ -96,50 +96,50 @@
             </div>
         </section>
 
-          {% endblock %}
+    {% endblock %}
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-          {#{% block jumbotron %}
-          <div class="jumbotron">
-            <div class="container">
-              <h1>{% block jumbotron_title %}Hello, world!{% endblock %}</h1>
-              {% block jumbotron_content %}
-              <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-              <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
-              {% endblock %}
-            </div>
-          </div>
-          {% endblock %}#}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    {#{% block jumbotron %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1>{% block jumbotron_title %}Hello, world!{% endblock %}</h1>
+        {% block jumbotron_content %}
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        {% endblock %}
+      </div>
+    </div>
+    {% endblock %}#}
 
 
-        <div class="container main-container">
-            {% block page_header %}
+    <div class="container main-container">
+        {% block page_header %}
             <div class="page-header">
                 <h1>{% block page_title %}Example page header{% endblock %} 
                     <small>{% block page_subtitle %}Subtext for header{% endblock %}</small></h1>
             </div>
-            {% endblock %}
+        {% endblock %}
+        <section class="content">
+            {% block fos_user_content %}{% endblock %}    
+        {% block body %}{% endblock %}
+    </section>
 
-            <section class="content">
-            {% block body %}{% endblock %}
-            </section>
+</div> <!-- /container -->
 
-        </div> <!-- /container -->
+<div class="container">
+    <hr>
+    {% block footer %}
+        <footer>
+            <p>&copy; Elinoix 2014</p>
+        </footer>
+    {% endblock %}
+</div> <!-- /container -->
 
-        <div class="container">
-            <hr>
-            {% block footer %}
-            <footer>
-                <p>&copy; Elinoix 2014</p>
-            </footer>
-            {% endblock %}
-        </div> <!-- /container -->
-
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="{{ asset('bundles/elinoixshop/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bundles/elinoixshop/js/modernizr.custom.js') }}"></script>
-        <script src="{{ asset('bundles/elinoixshop/js/slider.js') }}"></script>
-        <script src="{{ asset('bundles/elinoixshop/js/productSlider.js') }}"></script>
-        {% block custom_javascripts %}{% endblock %}
-    </body>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{{ asset('bundles/elinoixshop/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/elinoixshop/js/modernizr.custom.js') }}"></script>
+<script src="{{ asset('bundles/elinoixshop/js/slider.js') }}"></script>
+<script src="{{ asset('bundles/elinoixshop/js/productSlider.js') }}"></script>
+{% block custom_javascripts %}{% endblock %}
+</body>
 </html>

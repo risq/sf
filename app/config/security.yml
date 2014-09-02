@@ -18,7 +18,7 @@ security:
                 csrf_provider: form.csrf_provider
                 login_path: /login
                 always_use_default_target_path: true
-                default_target_path: /index
+                default_target_path: /home
                 failure_path:   /login
                 remember_me: true            # On active la possibilité du "Se souvenir de moi" (désactivé par défaut)
                 check_path: /login_check
@@ -29,7 +29,7 @@ security:
                 invalidate_session: false
             remember_me:
                 key: %secret%        # On définit la clé pour le remember_me (%secret% est un parametre de parameters.ini)
-                path: /index
+                path: /home
                 lifetime: 5000
     access_control:
         - { path: "^/login_redirect$", roles: ROLE_USER }
@@ -37,7 +37,33 @@ security:
         - { path: "^/org/[^/]+/show+/?$", roles: ROLE_USER }
         - { path: "^/client/[^/]+/show+/?$", roles: ROLE_USER }
         - { path: "^/panier", roles: ROLE_USER }
+        - { path: "^/home", roles: ROLE_USER }
         - { path: "^/org", roles: ROLE_ADMIN }
         - { path: "^/client", roles: ROLE_ADMIN }
-        - { path: "^/login", roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         # ANONYME
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY } 
+        - { path: ^/error403$, roles: [ ROLE_INACTIVE, ROLE_ACTIVE_CC_PROBLEM, ROLE_ACTIVE_NO_ACCESS,IS_AUTHENTICATED_ANONYMOUSLY,ROLE_UTILISATEUR ] }
+        - { path: ^/js, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
+        #- { path: ^/.*, role: IS_AUTHENTICATED_FULLY }
+        # -> end
+        - { path: ^/, role: ROLE_ADMIN }
+        #  ADMIN       
+        - { path: ^/_sonata_admin, role: ROLE_ADMIN }
+        - { path: ^/produit, roles: ROLE_ADMIN }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
+        - { path: ^/admin/$, roles: ROLE_ADMIN }
+        - { path: ^/_wdt, role: ROLE_ADMIN }
+        - { path: ^/_profiler, role: ROLE_ADMIN }
+        - { path: ^/_configurator, role: ROLE_ADMIN }
+        # -> custom access control for the admin area of the URL
+        - { path: ^/admin/login$, role: ROLE_ADMIN }
+        - { path: ^/admin/logout$, role: ROLE_ADMIN }
+        - { path: ^/admin/login-check$, role: ROLE_ADMIN }
+        - { path: ^/user$, role: ROLE_ADMIN }
+        - { path: ^/.*, role: ROLE_ADMIN }

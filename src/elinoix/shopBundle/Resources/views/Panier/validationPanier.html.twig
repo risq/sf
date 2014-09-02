@@ -1,11 +1,11 @@
-{% extends "sil13VitrineBundle::layout.html.twig" %}
+{% extends "elinoixshopBundle::layout.html.twig" %}
 
 {% block title %}
 Ma vitrine
 {% endblock %}
 
 {% block jumbotron %}
-    {{ render(controller('sil13VitrineBundle:Default:topVentes', {'max': 4})) }}
+    {{ render(controller('elinoixshopBundle:Default:topVentes', {'max': 4})) }}
 {% endblock %}
 
 {% block page_header %}

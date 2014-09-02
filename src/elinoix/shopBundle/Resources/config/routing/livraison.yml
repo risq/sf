@@ -6,9 +6,9 @@ livraison_show:
     pattern:  /{id}/show
     defaults: { _controller: "elinoixshopBundle:Livraison:show" }
 
-livraison_new:
-    pattern:  /new
-    defaults: { _controller: "elinoixshopBundle:Livraison:new" }
+#livraison_new:
+#    pattern:  /new
+#    defaults: { _controller: "elinoixshopBundle:Livraison:new" }
 
 livraison_create:
     pattern:  /create
@@ -28,3 +28,7 @@ livraison_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "elinoixshopBundle:Livraison:delete" }
     requirements: { _method: post|delete }
+    
+livraison_new:
+    pattern:  /{id}/new
+    defaults: { _controller: "elinoixshopBundle:Livraison:new" }
