@@ -141,7 +141,7 @@ class PanierController extends Controller {
                     $session->set('panier', $panier);
                     $commande_id = $commande->getId();
 
-                    return $this->redirect($this->generateUrl('livraison_new', array(
+                    return $this->redirect($this->generateUrl('commande_validation', array(
                         'id'  => $commande_id)));
                 }
                 else {
