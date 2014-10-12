@@ -1,43 +1,53 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        Symfony\Component\Security\Core\User\User: plaintext
+        elinoix\shopBundle\Entity\Organisation: plaintext
+
     role_hierarchy:
-        ROLE_ADMIN: ROLE_USER
+        ROLE_ADMIN:       ROLE_USER
+
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        organisations:
+            entity: { class: elinoixshopBundle:Organisation, property: login }
+
     firewalls:
-        login:
-            pattern:   ^/(login$|register|resetting)
-            anonymous: true       
-        main:
-            pattern: ^/                     # ^/ = tout ce qui commence par / = tout notre site
+#        dev:
+#            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
+#
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            form_login:
+#                check_path: _security_check
+#                login_path: _demo_login
+#            logout:
+#                path:   _demo_logout
+#                target: _demo
+#            firewalls:
+
+        shop:
+            pattern: ^/
             anonymous: ~
-            form_login:                      # On définit notre méthode d'authentification
-                provider:    fos_userbundle  # On lit l'authentification au provider définit plus haut
-                csrf_provider: form.csrf_provider
+            form_login:
                 login_path: /login
-                always_use_default_target_path: true
-                default_target_path: /index
-                failure_path:   /login
-                remember_me: true            # On active la possibilité du "Se souvenir de moi" (désactivé par défaut)
                 check_path: /login_check
-                use_forward: false
             logout:
-                path:   /logout
-                target: /login
-                invalidate_session: false
-            remember_me:
-                key: %secret%        # On définit la clé pour le remember_me (%secret% est un parametre de parameters.ini)
-                path: /index
-                lifetime: 5000
+                path: /logout
+                target: /
+               
+
     access_control:
         - { path: "^/login_redirect$", roles: ROLE_USER }
         - { path: "^/produit/[^/]+/show+/?$", roles: ROLE_USER }
         - { path: "^/org/[^/]+/show+/?$", roles: ROLE_USER }
         - { path: "^/client/[^/]+/show+/?$", roles: ROLE_USER }
         - { path: "^/panier", roles: ROLE_USER }
+        - { path: "^/produit", roles: ROLE_ADMIN }
         - { path: "^/org", roles: ROLE_ADMIN }
         - { path: "^/client", roles: ROLE_ADMIN }
         - { path: "^/login", roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
+        

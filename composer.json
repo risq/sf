@@ -4,9 +4,7 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": {
-            "": "src/"
-        }
+        "psr-0": { "": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
@@ -22,9 +20,7 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "payum/payum-bundle": "*@stable",
-        "payum/paypal-express-checkout-nvp": "*@stable",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
-
+        "payum/paypal-express-checkout-nvp": "*@stable"
     },
     "scripts": {
         "post-install-cmd": [
